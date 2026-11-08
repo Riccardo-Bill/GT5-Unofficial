@@ -53,6 +53,8 @@ import gregtech.api.structure.error.StructureError;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.common.gui.modularui.multiblock.MTESolarTowerGui;
+import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
 import gtPlusPlus.core.block.ModBlocks;
 import gtPlusPlus.core.material.MaterialMisc;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
@@ -151,6 +153,8 @@ public class MTESolarTower extends GTPPMultiBlockBase<MTESolarTower> implements 
                 // t = solar structural
                 // h = hatch
                 // g = solar heater
+                // a = advanced solar heater
+                // f = frame
 
                 .addShape(
                     STRUCTURE_PIECE_TOP,
@@ -576,6 +580,14 @@ public class MTESolarTower extends GTPPMultiBlockBase<MTESolarTower> implements 
         return CheckRecipeResultRegistry.GENERATING;
     }
 
+    public int getHeatLevel() {
+        return mHeatLevel;
+    }
+
+    public int getHeatCap() {
+        return HEAT_CAP;
+    }
+
     public Block getCasingBlock() {
         return ModBlocks.blockSpecialMultiCasings;
     }
@@ -643,4 +655,8 @@ public class MTESolarTower extends GTPPMultiBlockBase<MTESolarTower> implements 
                 .encode("gt.infoData.solar_tower.reflectors", String.valueOf(this.mSolarHeaters.size())) };
     }
 
+    @Override
+    protected @NotNull MTEMultiBlockBaseGui<?> getGui() {
+        return new MTESolarTowerGui(this);
+    }
 }
